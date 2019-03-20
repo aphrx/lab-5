@@ -232,6 +232,7 @@ void *cust_loop(int cust){
 			{
 				need[cust][i] = 0;
 				maximum[cust][i] = 0;
+				allocation[cust][i] = 0;
 			}
 			print_max();
 			print_need();
