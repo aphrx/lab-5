@@ -118,7 +118,7 @@ bool request_res(int n_customer, int request[])
 				{
 					allocation[n_customer][j] += request[j];
 					available[j] -= request[j];
-					need[n_customer][j] -= request[j];
+					need[n_customer][j] = maximum[n_customer][j] - allocation[n_customer][j];
 				}
 				if(is_safe()){
 					printf("%s\n", "Safe!");
@@ -130,7 +130,8 @@ bool request_res(int n_customer, int request[])
 					{
 						allocation[n_customer][j] -= request[j];
 						available[j] += request[j];
-						need[n_customer][j] += request[j];
+						//need[n_customer][j] += request[j];
+						need[n_customer][j] = maximum[n_customer][j] + allocation[n_customer][j];
 					}
 					return false;
 				}
@@ -267,8 +268,11 @@ int main(int argc, char *argv[])
 	    	{
 	    		//Set Max, Need and Alloc arrays
 	    		maximum[j][i] = rand() % (available[i]+1);
-	    		need[j][i] = maximum[j][i];
-	    		allocation[j][i] = 0;
+	    		allocation[j][i] = rand() % (maximum[j][i]+1);
+	    		//printf("%d\n", maximum[j][i]);
+	    		//printf("%d\n", allocation[j][i]);
+	    		//need[j][i] = maximum[j][i];
+	    		need[j][i] = maximum[j][i] - allocation[j][i];
 	    	}
     	}
     	//calc_need();
